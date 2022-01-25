@@ -123,8 +123,8 @@ class Generator:
         # generated outcomes 
         if D_distribution is None or (isinstance(D_distribution, str) and D_distribution.lower()[0] in ['g', 'n', 'b', 'p']):
             if D_distribution is None or D_distribution.lower()[0] in ['g', 'n']:
-                # Generate normal realizations, the means are taken as means, with unit variance
-                self.D_distribution = lambda means : self.rng.normal(means, scale=1)
+                # Generate normal realizations, the means are taken as means, with zero variance [e.g. return means]
+                self.D_distribution = lambda means : means
             elif D_distribution.lower()[0] == 'b':
                 # Generate Binomial Realizations, here 'means' represent probabilities
                 self.D_distribution = lambda means : self.rng.binomial(1, means)
