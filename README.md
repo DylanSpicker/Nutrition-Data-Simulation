@@ -1,6 +1,61 @@
 # Nutrition Data: Simulator
 > This repository provides a Python class which implements simulated nutrition (dietary) data in a highly customizable manner, as would be represented by (e.g.,) 24-hour recalls.
 
+## Simple Error Scenarios
+In the `simple_error_scenarios.py` file there are example scenarios which vary the amount of error present in a single day replicate using a standard linear regression model on either 2 dietary components individually or on the ratio of those 2 dietary components. Running `python3 simple_error_scenarios.py` does a single fit on each of these 40 scenarios. There are four sets of 10 scenarios with:
+* `uncorrelated_errors_scenarios`: representing the situation where the error terms have no covariance, but the amount of error increases. This uses each factor as a linear term in the model.
+* `correlated_errors_scenarios`: the same as the first scenario except there is covariance within the error terms.
+* `uncorrelated_errors_scenarios_ratio`: this represents the scenario where there is no covariance in error terms, but where the ratio of the two factors is used instead of the linear terms.
+* `correlated_errors_scenarios_ratio`: this represents the scenario where there is covariance and the ratio, rather than the linear terms, are used.
+
+This should produce the following output:
+```
+Starting uncorrelated_errors_scenarios:
+         For scenario 0 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 12.6204.
+         For scenario 1 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 22.2524.
+         For scenario 2 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 35.8079.
+         For scenario 3 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 57.4581.
+         For scenario 4 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 72.5218.
+         For scenario 5 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 88.3548.
+         For scenario 6 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 99.546.
+         For scenario 7 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 118.2219.
+         For scenario 8 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 125.9041.
+         For scenario 9 of 'uncorrelated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 140.4178.
+Starting correlated_errors_scenarios:
+         For scenario 0 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 8.7376.
+         For scenario 1 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 15.4728.
+         For scenario 2 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 23.787.
+         For scenario 3 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 41.5384.
+         For scenario 4 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 55.7068.
+         For scenario 5 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 64.7214.
+         For scenario 6 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 72.5232.
+         For scenario 7 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 93.4555.
+         For scenario 8 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 103.4148.
+         For scenario 9 of 'correlated_errors_scenarios' the true regression model had a PMSE of 1.0724 and the error-prone model had a PMSE of 125.7818.
+Starting uncorrelated_errors_scenarios_ratio:
+         For scenario 0 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.1446.
+         For scenario 1 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.1976.
+         For scenario 2 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.2523.
+         For scenario 3 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.3586.
+         For scenario 4 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.4326.
+         For scenario 5 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.5109.
+         For scenario 6 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.5686.
+         For scenario 7 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.6605.
+         For scenario 8 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.7612.
+         For scenario 9 of 'uncorrelated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 3.042.
+Starting correlated_errors_scenarios_ratio:
+         For scenario 0 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.1305.
+         For scenario 1 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.173.
+         For scenario 2 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.1435.
+         For scenario 3 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.2071.
+         For scenario 4 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.2576.
+         For scenario 5 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.2892.
+         For scenario 6 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.3186.
+         For scenario 7 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.3651.
+         For scenario 8 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.4051.
+         For scenario 9 of 'correlated_errors_scenarios_ratio' the true regression model had a PMSE of 1.0736 and the error-prone model had a PMSE of 1.5941.
+```
+
 ## Python Generator Parameters
 <table>
 <tr>

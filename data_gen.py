@@ -41,6 +41,7 @@ class Generator:
         elif callable(h_function):
             self.h_function = h_function
             self.r = self.h_function(np.ones((1, self.p))).shape[1]
+            
         else:
             raise ValueError("h_function should either be None or a callable object which takes in an np.array and returns a modified np.array.")
 
@@ -60,7 +61,7 @@ class Generator:
             self.alpha = [1]*(self.q+self.r+1)
         else:
             if len(alpha) != (1 + self.q + self.r):
-                raise ValueError(f"It is expected that alpha has 'q+r+1' components in it. Alpha had {len(alpha)}, while p was {self.p} and r was {self.r}.")
+                raise ValueError(f"It is expected that alpha has 'q+r+1' components in it. Alpha had {len(alpha)}, while q was {self.q} and r was {self.r}.")
             else:
                 self.alpha = alpha
 
@@ -123,8 +124,8 @@ class Generator:
         # generated outcomes 
         if D_distribution is None or (isinstance(D_distribution, str) and D_distribution.lower()[0] in ['g', 'n', 'b', 'p']):
             if D_distribution is None or D_distribution.lower()[0] in ['g', 'n']:
-                # Generate normal realizations, the means are taken as means, with zero variance [e.g. return means]
-                self.D_distribution = lambda means : means
+                # Generate normal realizations, the means are taken as means, with unit variance
+                self.D_distribution = lambda means : self.rng.normal(means, scale=1)
             elif D_distribution.lower()[0] == 'b':
                 # Generate Binomial Realizations, here 'means' represent probabilities
                 self.D_distribution = lambda means : self.rng.binomial(1, means)
@@ -152,6 +153,8 @@ class Generator:
     def _inv_box_cox(self, Y):
         if self.bc_lambda == 0:
             return np.exp(Y)
+        elif self.bc_lambda == -1:
+            return Y
         else:
             return np.power(self.bc_lambda*Y + 1, 1/self.bc_lambda)
         
