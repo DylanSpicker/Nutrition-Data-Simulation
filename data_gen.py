@@ -153,7 +153,7 @@ class Generator:
     def _inv_box_cox(self, Y):
         if self.bc_lambda == 0:
             return np.exp(Y)
-        elif self.bc_lambda == -1:
+        elif self.bc_lambda is None:
             return Y
         else:
             return np.power(self.bc_lambda*Y + 1, 1/self.bc_lambda)
